@@ -17,7 +17,6 @@ public class Constants {
     public static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@dominio\\.cl$";
     public static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
     public static final String MSG_EMAIL_INVALID = "El formato del correo electrónico no es válido.";
-    public static final String PASSWORD_INVALID= "La clave no cumple con los requisitos de formato.";
     public static final String MSG_PASSWORD_INVALID = "La contraseña no es válida. Debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.";
 
 }

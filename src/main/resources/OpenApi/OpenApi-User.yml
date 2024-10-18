@@ -1,0 +1,205 @@
+openapi: 3.0.1 
+info:
+  title: API BCI
+  description: Registro de usuarios.
+  version: "1.0.0"
+servers:
+  - url: 'https://localhost:8081'
+tags:
+  - name: BCI
+    description: Registro de usuarios.
+paths:
+  '/api/user':
+    post:
+      tags:
+      - User
+      summary: El servicio permite registrar un usuario.
+      description: >
+        ### Acerca de la funcionalidad expuesta
+        
+        El servicio permite registrar un usuario.
+
+        #### 1. Base de Datos H2
+        
+        se envia la informacion del usuario para ser registrada en la userdb en la Base de Datos H2.
+        
+        | Ambiente | Base de datos | 
+        
+        |----------|------------|
+        
+        | Desarrollo | dbUserd |
+        
+        | Certificación | por definir |
+        
+        | Producción | por definir |
+        
+
+        ### Usos válidos de Query Parameters
+        
+        | Resultado Esperado | Path Param | Query Param requerido |
+        
+        |--------------------|------------|-----------------------------|
+        
+        |El servicio permite registrar un usuario. |  | UserRequest |
+        
+
+        ### Códigos de error usados en esta versión de la API
+        
+        | Código | HTTP Status | Descripción |
+
+        |--------|-------------|-------------|
+        
+        | 200 | 200 | Ok.                     |
+        
+        | 400 | 400 | Bad Request.            |
+        
+        | 400-1 | 400 | Bad Request.            |
+        
+        | 400-1 | 400 | Bad Request.            |
+        
+      operationId: save
+      requestBody:
+        description: Entrada del Servicio
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+        required: true
+      responses:
+        200:
+          description: Ok.
+          content:
+            application/stream+json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        400:
+          description: Bad request.
+          content:
+            application/stream+json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UserPasswordInvalidResponse'
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UserPasswordInvalidResponse'
+        400-1:
+          description: Bad request.
+          content:
+            application/stream+json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UserEmailInvalidResponse'
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UserEmailInvalidResponse'
+        400-2:
+          description: Bad request.
+          content:
+            application/stream+json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UserEmailExistResponse'
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UserEmailExistResponse'                
+components:
+  schemas:
+    UserRequest:
+      title: UserRequest
+      type: object
+      properties:
+        name:
+          type: string
+          example: "juan Rodriguez"
+          description: Nombre del usuario
+        email:
+          type: string
+          format: email
+          example: "juan@dominio.cl"
+          description: Correo del usuario
+        password:
+          type: string
+          example: "Bnn%8nkn"
+          description: Clave de usuario
+        phones:
+          type: array
+          items:
+            type: object
+            properties:
+              number:
+                type: string
+                example: "1234567"
+                description: Numero de telefono
+              citycode:
+                type: string
+                example: "1"
+                description: Ciudad
+              contrycode:
+                type: string
+                example: "57"
+                description: Pais
+    UserResponse:
+      title: UserResponse
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: identificador de usuario
+        Created:
+          type: string
+          format: date
+          example: "2024-10-17"
+          description: Eecha de creación del usuario
+        Modified:
+          type: string
+          format: date
+          example: "2024-10-17"
+          description: Fecha de la última actualización de usuario
+        Last_login:
+          type: string
+          format: date
+          example: "2024-10-17"
+          description: Ultimo ingreso
+        Token:
+          type: string
+          example: "4050842b-1379-4290-a3c3-60f0c249f447"
+          description: token de acceso de la API
+        Isactive:
+          type: boolean
+          example: true
+          description: Indica si el usuario sigue habilitado dentro del sistema
+    UserPasswordInvalidResponse:
+      title: UserPasswordInvalidResponse
+      type: object
+      properties:
+        status:
+          type: string
+          example: "error"
+        message:
+          type: string
+          example: "La contraseña no es válida. Debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial"
+    UserEmailInvalidResponse:
+      title: UserEmailInvalidResponse
+      type: object
+      properties:
+        status:
+          type: string
+          example: "error"
+        message:
+          type: string
+          example: "El formato del correo electrónico no es válido."  
+    UserEmailExistResponse:
+      title: UserEmailExistResponse
+      type: object
+      properties:
+        status:
+          type: string
+          example: "error"
+        message:
+          type: string
+          example: "El correo electrónico ya está en uso"   

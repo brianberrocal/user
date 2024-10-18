@@ -18,11 +18,11 @@ Este es un servicio de gestión de usuarios desarrollado con Spring Boot. Permit
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tu_usuario/user-management-service.git
+   git clone https://github.com/brianberrocal/user.git
 
 2. Navega al directorio del proyecto:
    ```bash
-   cd user-management-service
+   cd user
    
 3. Compila el proyecto:
    ```bash
@@ -54,5 +54,34 @@ Este es un servicio de gestión de usuarios desarrollado con Spring Boot. Permit
            ]
        }
    - Respuesta:
-     -  200 OK: Usuario creado con éxito.
-     -  400 Bad Request: Error de validación.
+     -  200 OK
+     -  400 Bad Request
+     -  400-1 Bad Request
+     -  400-2 Bad Request
+
+## Collection del Servicio - POSTMAN:
+
+- Ingresar a la siguiente ruta dentro del proyecto donde se encuentran el collection llamado "BCI.postman_collection":
+    - user\src\main\resources\Collection
+
+## Evidencias de pruebas del servicio:
+
+- Ingresar a la siguiente ruta dentro del proyecto donde se encuentran adjuntas imagenes de las pruebas:
+  - user\src\main\resources\Evidencias
+
+## Diagrama de la Solucion:
+### Opcion #1
+- Ingresar a la siguiente ruta dentro del proyecto donde se encuentran el archivo llamado "Diagrama_solucion_User" que se puede abrir con la herramienta Drawio web:
+  - Ruta del archivo: user\src\main\resources\Diagrama-Solucion
+  - Link de la herramienta drawio : https://www.drawio.com/
+
+### Opcion #2
+
+Ingresar a la siguiente ruta dentro del proyecto donde se encuentran el archivo llamado "Diagrama_solucion_User.jpg":
+- Ruta del archivo: user\src\main\resources\Diagrama-Solucion
+
+## Contrato OpenApi del Servicio:
+
+- Ingresar a la siguiente ruta dentro del proyecto donde se encuentran archivo llamado OpenApi-User.yml que se puede abrir con la herramienta swagger Editor web:
+    - user\src\main\resources\OpenApi
+- Link de la herramienta drawio : https://editor.swagger.io/
